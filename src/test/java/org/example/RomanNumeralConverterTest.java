@@ -18,7 +18,7 @@ class RomanNumeralConverterTest {
     }
 
     @ParameterizedTest(name = "Should convert {0} in Roman to {1} in Arabic")
-    @CsvSource({"I,1", "V,5"})
+    @CsvSource({"I,1", "V,5", "X,10","L,50", "C, 100", "D, 500", "M, 1000"})
     void shouldConvertRomanToArabic(String roman, int arabic){
         int number = sut.convert(roman);
         assertThat(number).isEqualTo(arabic);
