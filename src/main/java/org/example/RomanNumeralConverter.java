@@ -11,8 +11,13 @@ public class RomanNumeralConverter {
 
     public int convert(String numberInRoman){
         int finalNumber = 0;
-        for(int i = 0; i < numberInRoman.length(); i++) {
-            finalNumber += table.get(numberInRoman.charAt(i));
+        int lastNeighbor = 0;
+        for(int i = numberInRoman.length() - 1; i >= 0; i--) {
+            int current = table.get(numberInRoman.charAt(i));
+            int multiplier = 1;
+            if(current < lastNeighbor) multiplier = -1;
+            finalNumber += table.get(numberInRoman.charAt(i)) * multiplier;
+            lastNeighbor = current;
         }
         return finalNumber;
     }
