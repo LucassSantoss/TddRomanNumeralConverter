@@ -3,6 +3,8 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,18 +17,10 @@ class RomanNumeralConverterTest {
         sut = new RomanNumeralConverter();
     }
 
-
-    @Test
-    @DisplayName("Should convert I to 1")
-    void shouldConvertITo1(){
-        int number = sut.convert("I");
-        assertThat(number).isEqualTo(1);
-    }
-    
-    @Test
-    @DisplayName("Should convert V to 5")
-    void shouldConvertVTo5(){
-        int number = sut.convert("V");
-        assertThat(number).isEqualTo(5);
+    @ParameterizedTest(name = "Should convert {0} in Roman to {1} in Arabic")
+    @CsvSource({"I,1", "V,5"})
+    void shouldConvertRomanToArabic(String roman, int arabic){
+        int number = sut.convert(roman);
+        assertThat(number).isEqualTo(arabic);
     }
 }
